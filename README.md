@@ -4,6 +4,8 @@ This is **yet another colorpicker** plugin for jQuery since most of them are not
 
 The plugin is a fork of the one developed by Stefan Petre who seems not to be interested in it anymore. I needed a powerfull colorpicker for one of my projects so I updated it and then thought it would be nice if it would were freely available.
 
+You can see the [demo][] now.
+
 ##Features
 
 - Flat model - as element in page, attached to an input and custom widget.
@@ -15,55 +17,6 @@ The plugin is a fork of the one developed by Stefan Petre who seems not to be in
 ##License
 
 The plugin is currently dual licensed under the MIT and GPL licenses.
-
-##Examples
-
-###Flat mode
-
-        $('#colorpickerHolder').ColorPicker({flat: true});  
-
-Custom skin and using flat mode to display the color picker in a custom widget.
-
-        $('#colorpickerHolder').ColorPicker({  
-        	flat: true,  
-        	color: '#00ff00',  
-        	onSubmit: function(hsb, hex, rgb) {  
-        		$('#colorSelector2 div').css('backgroundColor', '#' + hex);  
-        	}  
-        });  
-
-
-Attached to a text field and using callback functions to update the color with field's value and set the value back in the field by submiting the color.
-
-        $('#colorpickerHolder).ColorPicker({  
-        	onSubmit: function(hsb, hex, rgb, el) {  
-        		$(el).val(hex);  
-        		$(el).ColorPickerHide();  
-        	},  
-        	onBeforeShow: function () {  
-        		$(this).ColorPickerSetColor(this.value);  
-        	}  
-        })  
-        .bind('keyup', function(){  
-        	$(this).ColorPickerSetColor(this.value);  
-        });  
-
-Attached to DOM and using callbacks to live preview the color and adding animation.
-
-        $('#colorSelector').ColorPicker({  
-        	color: '#0000ff',  
-        	onShow: function (colpkr) {  
-        		$(colpkr).fadeIn(500);  
-        		return false;  
-        	},  
-        	onHide: function (colpkr) {  
-        		$(colpkr).fadeOut(500);  
-        		return false;  
-        	},  
-        	onChange: function (hsb, hex, rgb) {  
-        		$('#colorSelector div').css('backgroundColor', '#' + hex);  
-        	}  
-        }); 
 
 ##Implement
 
@@ -106,3 +59,53 @@ If you want to set a new color.
         $('input').ColorPickerSetColor(color);  
 
 The 'color' argument is the same format as the option color, string for hex color or object for RGB and HSB ({r:255, r:0, b:0}).
+
+##Examples
+
+###Flat mode
+
+        $('#colorpickerholder').ColorPicker({flat: true});  
+
+Custom skin and using flat mode to display the color picker in a custom widget.
+
+        $('#colorpickerholder2').ColorPicker({  
+        	flat: true,  
+        	color: '#EFEFEF',  
+        	onSubmit: function(hsb, hex, rgb) {  
+        		$('#colorselector div').css('backgroundColor', '#' + hex);  
+        	}  
+        });  
+
+
+Attached to a text field and using callback functions to update the color with field's value and set the value back in the field by submiting the color.
+
+        $('#colorpickerfield').ColorPicker({  
+        	onSubmit: function(hsb, hex, rgb, el, parent) {  
+        		$(el).val(hex);  
+        		$(el).ColorPickerHide();  
+        	},  
+        	onBeforeShow: function () {  
+        		$(this).ColorPickerSetColor(this.value);  
+        	}  
+        })  
+        .bind('keyup', function(){  
+        	$(this).ColorPickerSetColor(this.value);  
+        });  
+
+Attached to DOM and using callbacks to live preview the color and adding animation.
+
+        $('#colorselector2').ColorPicker({  
+        	color: '#EFEFEF',  
+        	onShow: function (colpkr) {  
+        		$(colpkr).fadeIn(500);  
+        		return false;  
+        	},  
+        	onHide: function (colpkr) {  
+        		$(colpkr).fadeOut(500);  
+        		return false;  
+        	},  
+        	onChange: function (hsb, hex, rgb) {  
+        		$('#colorselector2 div').css('backgroundColor', '#' + hex);  
+        	}  
+        });
+[demo]: www.funcion13.com/plugins/jquery-colorpicker/ "View the demo!"
