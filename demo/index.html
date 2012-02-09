@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery ColorPicker - Yet another jQuery ColorPicker</title>
+    <meta charset="utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Lilita+One' rel='stylesheet' type='text/css'>
+    <link href="css/page.css" rel="stylesheet" type="text/css" media="all">
+    <link href="css/colorpicker.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+    <a href="http://github.com/you">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="images/forkme.png" alt="Fork me on GitHub">
+    </a>
+	<div id="wrapper">
+		<h1>jQuery ColorPicker</h1>
+        <article>
+            <h1>ColorPicker</h1>
+
+            <p>This is <strong>yet another colorpicker</strong> plugin for jQuery since most of them are not on GitHub nor being mantained at the moment.</p>
+
+            <p>The plugin is a fork of the one developed by Stefan Petre who seems not to be interested in it anymore. I needed a powerfull colorpicker for one of my projects so I updated it and then thought it would be nice if it would were freely available.</p>
+
+            <h2>Features</h2>
+
+            <ul>
+            <li>Flat model - as element in page, attached to an input and custom widget.</li>
+            <li>Powerful controls for color selection  </li>
+            <li>Easy to customize the look by changing some images  </li>
+            <li>Fits into the viewport  </li>
+            <li>Powerful callback system to totally control the way it works</li>
+            </ul>
+
+            <h2>License</h2>
+
+            <p>The plugin is currently dual licensed under the MIT and GPL licenses.</p>
+
+            <h2>Implement</h2>
+
+            <p>Attach the Javascript and CSS files to your document. Edit CSS file and fix the paths to images and change colors to fit your site theme.</p>
+
+            <pre>
+    &lt;link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" /&gt;
+    &lt;script src="js/colorpicker.js"&gt;&lt;/script&gt;
+            </pre>
+
+            <h2>How to use</h2>
+
+            <p>All you have to do, is to select the elements in a jQuery way and call the plugin over them.</p>
+
+            <pre>    $('input').ColorPicker(options); </pre>
+
+            <h2>Options</h2>
+
+            <p>An object containing parameters. Please, note that all parameters are optional. </p>
+
+            <blockquote>
+              <p><strong>eventName</strong> (<em>string</em>): This is the desired event to trigger the colorpicker. Default: 'click'  </p>
+
+              <p><strong>color</strong> (<em>string</em> or <em>object</em>): The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}) . Default: 'ff0000'</p>
+
+              <p><strong>flat</strong>    (<em>boolean</em>):  Whether if the color picker is appended to the element or triggered by an event. Default false</p>
+
+              <p><strong>livePreview</strong> (<em>boolean</em>): Whether if the color values are filled in the fields while changing values on selector or a field. If false it may improve speed. Default true</p>
+
+              <p><strong>onShow</strong> (<em>function</em>): Callback function triggered when the colorpicker is shown</p>
+
+              <p><strong>onBeforeShow</strong> (<em>function</em>) Callback function triggered before the colorpicker is shown</p>
+
+              <p><strong>onHide</strong> (<em>function</em>): Callback function triggered when the colorpicker is hidden</p>
+
+              <p><strong>onChange</strong> (<em>function</em>): Callback function triggered when the color is changed</p>
+
+              <p><strong>onSubmit</strong> (<em>function</em>): Callback function triggered when the color is chosen</p>
+            </blockquote>
+
+            <h2>Methods</h2>
+
+            <p>If you want to set a new color.</p>
+
+            <pre>    $('input').ColorPickerSetColor(color);
+            </pre>
+
+            <p>The 'color' argument is the same format as the option color, string for hex color or object for RGB and HSB ({r:255, r:0, b:0}).
+            </p>
+            <h2>Examples</h2>
+
+            <h3>Flat mode</h3>
+
+            <pre>   $('#colorpickerholder').ColorPicker({flat: true}); </pre>
+            <div id="colorpickerholder"></div>
+            <p>Custom skin and using flat mode to display the color picker in a custom widget.</p>
+
+            <pre>
+    $('#colorpickerholder2').ColorPicker({
+        flat: true,
+        color: '#EFEFEF',
+        onSubmit: function(hsb, hex, rgb) {
+            $('#colorselector div').css('backgroundColor', '#' + hex);
+        }
+    });
+            </pre>
+            <div id="customWidget">
+                <div id="colorselector"><div style="background-color: #EFEFEF"></div></div>
+                <div id="colorpickerholder2">
+                </div>
+            </div>
+            <p>Attached to a text field and using callback functions to update the color with field's value and set the value back in the field by submiting the color.</p>
+
+            <pre>
+    $('#colorpickerfield').ColorPicker({
+        onSubmit: function(hsb, hex, rgb, el, parent) {
+            $(el).val(hex);
+            $(el).ColorPickerHide();
+        },
+        onBeforeShow: function () {
+            $(this).ColorPickerSetColor(this.value);
+        }
+    })
+    .bind('keyup', function(){
+        $(this).ColorPickerSetColor(this.value);
+    });
+            </pre>
+            <p><input type="text" maxlength="6" size="6" id="colorpickerfield" value="EFEFEF" /></p>
+            <p>Attached to DOM and using callbacks to live preview the color and adding animation.</p>
+
+            <pre>
+    $('#colorselector2').ColorPicker({
+        color: '#EFEFEF',
+        onShow: function (colpkr) {
+            $(colpkr).fadeIn(500);
+            return false;
+        },
+        onHide: function (colpkr) {
+            $(colpkr).fadeOut(500);
+            return false;
+        },
+        onChange: function (hsb, hex, rgb) {
+            $('#colorSelector div').css('backgroundColor', '#' + hex);
+        }
+    });
+            </pre>
+            <div id="colorselector2"><div style="background-color: #EFEFEF"></div></div>
+        </article>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="js/colorpicker.js"></script>
+	<script>
+		$(function(){
+            var widt = false;
+            $('#colorpickerholder').ColorPicker({flat: true});
+            $('#colorpickerholder2').ColorPicker({
+                flat: true,
+                color: '#EFEFEF',
+                onSubmit: function(hsb, hex, rgb) {
+                    $('#colorselector div').css('backgroundColor', '#' + hex);
+                }
+            });
+            $('#colorselector').bind('click', function() {
+                $('#colorpickerholder2').stop().animate({height: widt ? 0 : 173}, 500);
+                widt = !widt;
+            });
+            $('#colorpickerfield').ColorPicker({
+                onSubmit: function(hsb, hex, rgb, el, parent) {
+                    $(el).val(hex);
+                    $(el).ColorPickerHide();
+                },
+                onBeforeShow: function () {
+                    $(this).ColorPickerSetColor(this.value);
+                }
+            })
+            .bind('keyup', function(){
+                $(this).ColorPickerSetColor(this.value);
+            });
+            $('#colorselector2').ColorPicker({
+                color: '#EFEFEF',
+                onShow: function (colpkr) {
+                    $(colpkr).fadeIn(500);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    $(colpkr).fadeOut(500);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    $('#colorselector2 div').css('backgroundColor', '#' + hex);
+                }
+            });
+		});
+	</script>
+</body>
+</html>
