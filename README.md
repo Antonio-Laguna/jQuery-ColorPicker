@@ -108,4 +108,4 @@ Attached to DOM and using callbacks to live preview the color and adding animati
         		$('#colorselector2 div').css('backgroundColor', '#' + hex);  
         	}  
         });
-[demo]: www.funcion13.com/plugins/jquery-colorpicker/ "View the demo!"
+[demo]: jQuery-ColorPicker/demo/index.html "View the demo now!"
