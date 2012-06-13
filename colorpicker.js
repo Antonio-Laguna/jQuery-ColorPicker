@@ -379,7 +379,14 @@
 					if (!$(this).data('colorpickerId')) {
 						var options = $.extend({}, opt);
 						options.origColor = opt.color;
-						var id = 'collorpicker_' + parseInt(Math.random() * 1000);
+						var idOk = false;
+						var idCounter = 0;
+						idOk = $('#colorpicker_' + idCounter).length == 0;
+						while (!idOk){
+							idCounter = parseInt(Math.random() * 10000);
+							idOk = $('#colorpicker_' + idCounter).length == 0;
+						}
+						var id = 'colorpicker_' + idCounter;
 						$(this).data('colorpickerId', id);
 						options.parent = $(this);
 						var cal = $(tpl);
