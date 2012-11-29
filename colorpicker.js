@@ -110,7 +110,6 @@
 				$(document).bind('mousemove', current, moveIncrement);
 			},
 			moveIncrement = function (ev) {
-				console.log("downIncrement");
 				ev.data.field.val(Math.max(0, Math.min(ev.data.max, parseInt(ev.data.val + ev.pageY - ev.data.y, 10))));
 				if (ev.data.preview) {
 					change.apply(ev.data.field.get(0), [true]);
@@ -162,7 +161,6 @@
 				$(".colorpicker_color").bind('click', current, moveSelector);
 			},
 			moveSelector = function (ev) {
-				console.log("moveSelector");
 				change.apply(
 					ev.data.cal.data('colorpicker')
 						.fields
