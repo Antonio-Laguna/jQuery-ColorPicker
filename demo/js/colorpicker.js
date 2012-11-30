@@ -104,12 +104,13 @@
 					y: ev.pageY,
 					field: field,
 					val: parseInt(field.val(), 10),
-					preview: $(this).parent().parent().data('colorpicker').livePreview					
+					preview: $(this).parent().parent().data('colorpicker').livePreview
 				};
 				$(document).bind('mouseup', current, upIncrement);
 				$(document).bind('mousemove', current, moveIncrement);
 			},
 			moveIncrement = function (ev) {
+				console.log("downIncrement");
 				ev.data.field.val(Math.max(0, Math.min(ev.data.max, parseInt(ev.data.val + ev.pageY - ev.data.y, 10))));
 				if (ev.data.preview) {
 					change.apply(ev.data.field.get(0), [true]);
@@ -158,8 +159,10 @@
 				current.preview = current.cal.data('colorpicker').livePreview;
 				$(document).bind('mouseup', current, upSelector);
 				$(document).bind('mousemove', current, moveSelector);
+				$(".colorpicker_color").bind('click', current, moveSelector);
 			},
 			moveSelector = function (ev) {
+				console.log("moveSelector");
 				change.apply(
 					ev.data.cal.data('colorpicker')
 						.fields
@@ -178,6 +181,7 @@
 				fillHexFields(ev.data.cal.data('colorpicker').color, ev.data.cal.get(0));
 				$(document).unbind('mouseup', upSelector);
 				$(document).unbind('mousemove', moveSelector);
+				$(".colorpicker_color").unbind('click', current, moveSelector);
 				return false;
 			},
 			enterSubmit = function (ev) {
@@ -254,7 +258,7 @@
 					s: Math.min(100, Math.max(0, hsb.s)),
 					b: Math.min(100, Math.max(0, hsb.b))
 				};
-			}, 
+			},
 			fixRGB = function (rgb) {
 				return {
 					r: Math.min(255, Math.max(0, rgb.r)),
@@ -273,7 +277,7 @@
 					hex = o.join('');
 				}
 				return hex;
-			}, 
+			},
 			HexToRGB = function (hex) {
 				var hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
 				return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
@@ -292,7 +296,7 @@
 				var delta = max - min;
 				hsb.b = max;
 				if (max != 0) {
-					
+
 				}
 				hsb.s = max != 0 ? 255 * delta / max : 0;
 				if (hsb.s != 0) {
@@ -381,19 +385,20 @@
 						options.origColor = opt.color;
 						var id = 'collorpicker_' + parseInt(Math.random() * 1000);
 						$(this).data('colorpickerId', id);
-                        options.parent = $(this);
-						var cal = $(tpl).attr('id', id).attr('data-parent', $(this).attr('id'));
+						options.parent = $(this);
+						var cal = $(tpl);
+						cal.attr('id', id).attr('data-parent', $(this).attr('id'));
 						if (options.flat) {
 							cal.appendTo(this).show();
 						} else {
 							cal.appendTo(document.body);
 						}
 						options.fields = cal
-											.find('input')
-												.bind('keyup', keyDown)
-												.bind('change', change)
-												.bind('blur', blur)
-												.bind('focus', focus);
+							.find('input')
+							.bind('keyup', keyDown)
+							.bind('change', change)
+							.bind('blur', blur)
+							.bind('focus', focus);
 						cal
 							.find('span').bind('mousedown', downIncrement).end()
 							.find('>div.colorpicker_current_color').bind('click', restoreOriginal);
