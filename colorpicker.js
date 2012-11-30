@@ -150,6 +150,18 @@
 				$(document).unbind('mousemove', moveHue);
 				return false;
 			},
+			changeHue = function(ev) {
+				y = $(this).offset().top;
+				preview = ev.data.cal.data('colorpicker').livePreview;
+				change.apply(
+					ev.data.cal.data('colorpicker')
+						.fields
+						.eq(4)
+						.val(parseInt(360*(150 - Math.max(0,Math.min(150,(ev.pageY - y))))/150, 10))
+						.get(0),
+					[preview]
+				);
+			};
 			downSelector = function (ev) {
 				var current = {
 					cal: $(this).parent(),
@@ -158,7 +170,7 @@
 				current.preview = current.cal.data('colorpicker').livePreview;
 				$(document).bind('mouseup', current, upSelector);
 				$(document).bind('mousemove', current, moveSelector);
-				$(".colorpicker_color").bind('click', current, moveSelector);
+				$(".colorpicker_color").one('click', current, moveSelector);
 			},
 			moveSelector = function (ev) {
 				change.apply(
@@ -183,7 +195,6 @@
 				fillHexFields(ev.data.cal.data('colorpicker').color, ev.data.cal.get(0));
 				$(document).unbind('mouseup', upSelector);
 				$(document).unbind('mousemove', moveSelector);
-				$(".colorpicker_color").unbind('click', current, moveSelector);
 				return false;
 			},
 			enterSubmit = function (ev) {
@@ -435,6 +446,7 @@
 						options.el = this;
 						options.hue = cal.find('div.colorpicker_hue div');
 						cal.find('div.colorpicker_hue').bind('mousedown', downHue);
+						cal.find('div.colorpicker_hue').bind('click', {cal: cal}, changeHue);
 						options.newColor = cal.find('div.colorpicker_new_color');
 						options.currentColor = cal.find('div.colorpicker_current_color');
 						cal.data('colorpicker', options);
