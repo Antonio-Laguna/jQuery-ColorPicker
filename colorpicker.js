@@ -175,6 +175,10 @@
 				return false;
 			},
 			upSelector = function (ev) {
+				var current = {
+					cal: $(this).parent(),
+					pos: $(this).offset()
+				};
 				fillRGBFields(ev.data.cal.data('colorpicker').color, ev.data.cal.get(0));
 				fillHexFields(ev.data.cal.data('colorpicker').color, ev.data.cal.get(0));
 				$(document).unbind('mouseup', upSelector);
@@ -351,6 +355,21 @@
 				});
 				return hex.join('');
 			},
+			RGBstringToHex = function(rgb)
+			{
+				if (!rgb) {
+					return '#FFFFFF';
+				}
+				var hex_rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+				function hex(x) {
+					return ("0" + parseInt(x).toString(16)).slice(-2);
+				}
+				if (hex_rgb) {
+					return "#" + hex(hex_rgb[1]) + hex(hex_rgb[2]) + hex(hex_rgb[3]);
+				} else {
+					return rgb; //ie8 returns background-color in hex
+				}
+			},
 			HSBToHex = function (hsb) {
 				return RGBToHex(HSBToRGB(hsb));
 			},
@@ -369,7 +388,11 @@
 			init: function (opt) {
 				opt = $.extend({}, defaults, opt||{});
 				if (typeof opt.color == 'string') {
-					opt.color = HexToHSB(opt.color);
+					if (opt.color.substring(0, 4) == "rgb(") {
+						opt.color = HexToHSB(RGBstringToHex(opt.color));
+					} else {
+						opt.color = HexToHSB(opt.color);
+					}
 				} else if (opt.color.r != undefined && opt.color.g != undefined && opt.color.b != undefined) {
 					opt.color = RGBToHSB(opt.color);
 				} else if (opt.color.h != undefined && opt.color.s != undefined && opt.color.b != undefined) {
@@ -453,7 +476,11 @@
 			},
 			setColor: function(col) {
 				if (typeof col == 'string') {
-					col = HexToHSB(col);
+					if (col.substring(0, 4) == "rgb(") {
+						col = HexToHSB(RGBstringToHex(col));
+					} else {
+						col = HexToHSB(col);
+					}
 				} else if (col.r != undefined && col.g != undefined && col.b != undefined) {
 					col = RGBToHSB(col);
 				} else if (col.h != undefined && col.s != undefined && col.b != undefined) {
