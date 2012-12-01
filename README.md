@@ -109,3 +109,12 @@ Attached to DOM and using callbacks to live preview the color and adding animati
         	}  
         });
 [demo]: http://belelros.github.com/jQuery-ColorPicker/ "View the demo now!"
+
+##Thanks
+
+I would like to thank to everybody that keeps mantaining this ColorPicker. By far, these people have been added/fixed something to this:
+
+- [Colin Viebrock](https://github.com/cviebrock)
+- [Fabian Mücke](https://github.com/fabianmuecke)
+- Ken Thomson (sorry, couldn't find it's profile)
+- [Daniel Macedo](https://github.com/dm)
