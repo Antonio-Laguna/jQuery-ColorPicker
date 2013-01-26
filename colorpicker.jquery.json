@@ -1,0 +1,28 @@
+{
+  "name": "Colorpicker",
+  "title": "jQuery-Colorpicker",
+  "description": "This is yet another colorpicker plugin for jQuery since most of them are not on GitHub nor being mantained at the moment. The plugin is a fork of the one developed by Stefan Petre who seems not to be interested in it anymore. I needed a powerfull colorpicker for one of my projects so I updated it and then thought it would be nice if it would were freely available.",
+  "keywords": [
+    "colorpicker",
+    "color",
+    "colour"
+  ],
+  "version": "1.0.2",
+  "author": {
+    "name": "Antonio Laguna Matías",
+	"email" : "a.laguna@funcion13.com",
+    "url": "http://www.funcion13.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Belelros/jQuery-ColorPicker/blob/master/MIT-LICENSE.txt"
+    }
+  ],
+  "bugs": "https://github.com/Belelros/jQuery-ColorPicker/issues",
+  "homepage": "http://belelros.github.com/jQuery-ColorPicker/",
+  "docs": "https://github.com/Belelros/jQuery-ColorPicker",
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
