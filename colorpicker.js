@@ -168,6 +168,8 @@
 				$(document).on('mouseup', current, upSelector);
 				$(document).on('mousemove', current, moveSelector);
 				$(".colorpicker_color").one('click', current, moveSelector);
+				ev.data = current;
+				moveSelector(ev);
 			},
 			moveSelector = function (ev) {
 				change.apply(
@@ -442,7 +444,7 @@
 						options.el = this;
 						options.hue = cal.find('div.colorpicker_hue div');
 						cal.find('div.colorpicker_hue').on('mousedown', downHue);
-						cal.find('div.colorpicker_hue').on('click', {cal: cal}, changeHue);
+						cal.find('div.colorpicker_hue').on('mousedown', {cal: cal}, changeHue);
 						options.newColor = cal.find('div.colorpicker_new_color');
 						options.currentColor = cal.find('div.colorpicker_current_color');
 						cal.data('colorpicker', options);
