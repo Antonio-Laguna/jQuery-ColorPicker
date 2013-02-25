@@ -105,6 +105,7 @@
 				};
 				$(document).on('mouseup', current, upIncrement);
 				$(document).on('mousemove', current, moveIncrement);
+				return stopHighlight(ev);
 			},
 			moveIncrement = function (ev) {
 				ev.data.field.val(Math.max(0, Math.min(ev.data.max, parseInt(ev.data.val + ev.pageY - ev.data.y, 10))));
@@ -128,6 +129,7 @@
 				current.preview = current.cal.data('colorpicker').livePreview;
 				$(document).on('mouseup', current, upHue);
 				$(document).on('mousemove', current, moveHue);
+				return stopHighlight(ev);
 			},
 			moveHue = function (ev) {
 				change.apply(
@@ -170,6 +172,7 @@
 				$(".colorpicker_color").one('click', current, moveSelector);
 				ev.data = current;
 				moveSelector(ev);
+				return stopHighlight(ev);
 			},
 			moveSelector = function (ev) {
 				change.apply(
@@ -514,6 +517,11 @@
 				});
 			}
 		};
+		function stopHighlight(e) {
+			if (e.originalEvent.preventDefault)
+				e.originalEvent.preventDefault();
+			return false;
+		}
 	}();
 	$.fn.extend({
 		ColorPicker: ColorPicker.init,
