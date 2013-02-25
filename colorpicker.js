@@ -105,6 +105,7 @@
 				};
 				$(document).on('mouseup', current, upIncrement);
 				$(document).on('mousemove', current, moveIncrement);
+				return stopHighlight(ev);
 			},
 			moveIncrement = function (ev) {
 				ev.data.field.val(Math.max(0, Math.min(ev.data.max, parseInt(ev.data.val + ev.pageY - ev.data.y, 10))));
@@ -128,6 +129,7 @@
 				current.preview = current.cal.data('colorpicker').livePreview;
 				$(document).on('mouseup', current, upHue);
 				$(document).on('mousemove', current, moveHue);
+				return stopHighlight(ev);
 			},
 			moveHue = function (ev) {
 				change.apply(
@@ -168,6 +170,9 @@
 				$(document).on('mouseup', current, upSelector);
 				$(document).on('mousemove', current, moveSelector);
 				$(".colorpicker_color").one('click', current, moveSelector);
+				ev.data = current;
+				moveSelector(ev);
+				return stopHighlight(ev);
 			},
 			moveSelector = function (ev) {
 				change.apply(
@@ -442,7 +447,7 @@
 						options.el = this;
 						options.hue = cal.find('div.colorpicker_hue div');
 						cal.find('div.colorpicker_hue').on('mousedown', downHue);
-						cal.find('div.colorpicker_hue').on('click', {cal: cal}, changeHue);
+						cal.find('div.colorpicker_hue').on('mousedown', {cal: cal}, changeHue);
 						options.newColor = cal.find('div.colorpicker_new_color');
 						options.currentColor = cal.find('div.colorpicker_current_color');
 						cal.data('colorpicker', options);
@@ -512,6 +517,11 @@
 				});
 			}
 		};
+		function stopHighlight(e) {
+			if (e.originalEvent.preventDefault)
+				e.originalEvent.preventDefault();
+			return false;
+		}
 	}();
 	$.fn.extend({
 		ColorPicker: ColorPicker.init,
