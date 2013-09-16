@@ -82,7 +82,7 @@
 				setSelector(col, cal.get(0));
 				setHue(col, cal.get(0));
 				setNewColor(col, cal.get(0));
-				cal.data('colorpicker').onChange.apply(cal, [col, HSBToHex(col), HSBToRGB(col)]);
+				cal.data('colorpicker').onChange.apply(cal, [col, HSBToHex(col), HSBToRGB(col),  cal.data('colorpicker').parent ]);
 			},
 			blur = function (ev) {
 				var cal = $(this).parent().parent();
@@ -169,7 +169,7 @@
 				current.preview = current.cal.data('colorpicker').livePreview;
 				$(document).on('mouseup', current, upSelector);
 				$(document).on('mousemove', current, moveSelector);
-				$(".colorpicker_color").one('click', current, moveSelector);
+				$(".colorpicker_color", current.cal).one('click', current, moveSelector);
 				ev.data = current;
 				moveSelector(ev);
 				return stopHighlight(ev);
