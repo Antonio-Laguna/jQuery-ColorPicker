@@ -169,7 +169,7 @@
 				current.preview = current.cal.data('colorpicker').livePreview;
 				$(document).on('mouseup', current, upSelector);
 				$(document).on('mousemove', current, moveSelector);
-				$(".colorpicker_color").one('click', current, moveSelector);
+				$(".colorpicker_color", current.cal).one('click', current, moveSelector);
 				ev.data = current;
 				moveSelector(ev);
 				return stopHighlight(ev);
