@@ -220,7 +220,7 @@
     left: 35%;
     margin-top: 5px;
     margin-bottom: 5px;
-    background: url("../select.png");
+    background: url("../images/select.png");
 }
 .colorSelector div {
     position: absolute;
@@ -228,5 +228,5 @@
 	left: 3px;
 	width: 30px;
 	height: 30px;
-	background: url("../select.png") center;
+	background: url("../images/select.png") center;
 }
