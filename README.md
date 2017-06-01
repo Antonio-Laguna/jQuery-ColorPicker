@@ -1,4 +1,4 @@
-#ColorPicker
+# ColorPicker
 
 This is **yet another colorpicker** plugin for jQuery since most of them are not on GitHub nor being mantained at the moment.
 
@@ -6,7 +6,7 @@ The plugin is a fork of the one developed by Stefan Petre who seems not to be in
 
 You can see the [demo][] now.
 
-##Features
+## Features
 
 - Flat model - as element in page, attached to an input and custom widget.
 - Powerful controls for color selection  
@@ -14,24 +14,24 @@ You can see the [demo][] now.
 - Fits into the viewport  
 - Powerful callback system to totally control the way it works
 
-##License
+## License
 
 The plugin is currently dual licensed under the MIT and GPL licenses.
 
-##Implement
+## Implement
 
 Attach the Javascript and CSS files to your document. Edit CSS file and fix the paths to images and change colors to fit your site theme.
 
         <link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />  
         <script src="js/colorpicker.js"></script>
 
-##How to use
+## How to use
 
 All you have to do, is to select the elements in a jQuery way and call the plugin over them.
 
         $('input').ColorPicker(options); 
 
-##Options
+## Options
 An object containing parameters. Please, note that all parameters are optional. 
 
 >  **eventName** (*string*): This is the desired event to trigger the colorpicker. Default: 'click'  
@@ -52,7 +52,7 @@ An object containing parameters. Please, note that all parameters are optional.
 
 > **onSubmit** (*function*): Callback function triggered when the color is chosen
 
-##Methods
+## Methods
 
 If you want to set a new color.
 
@@ -60,9 +60,9 @@ If you want to set a new color.
 
 The 'color' argument is the same format as the option color, string for hex color or object for RGB and HSB ({r:255, r:0, b:0}).
 
-##Examples
+## Examples
 
-###Flat mode
+### Flat mode
 
         $('#colorpickerholder').ColorPicker({flat: true});  
 
@@ -110,7 +110,7 @@ Attached to DOM and using callbacks to live preview the color and adding animati
         });
 [demo]: http://belelros.github.com/jQuery-ColorPicker/ "View the demo now!"
 
-##Thanks
+## Thanks
 
 I would like to thank to everybody that keeps mantaining this ColorPicker. By far, these people have been added/fixed something to this:
 
